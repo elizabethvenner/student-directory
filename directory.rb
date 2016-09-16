@@ -26,7 +26,7 @@ def input_students
         #add the student hash to the array
         students << {name: name, cohort: :november}
         if students.length == 1
-            puts "Now we have #{students.count} student"
+            puts "Now we have 1 student"
         else
             puts "Now we have #{students.count} students"
         end
@@ -52,7 +52,7 @@ end
 
 def print_footer(names)
     if names.count == 1
-        puts "Overall, we have #{names.count} great student"
+        puts "Overall, we have 1 great student"
     else
         puts "Overall, we have #{names.count} great students"
     end
