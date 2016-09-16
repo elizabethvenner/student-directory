@@ -44,8 +44,8 @@ def print_header
 end
 
 def print(students)
-    t_students = students.select {|student|student[:name][0] == "T"}
-    t_students.each_with_index do |student, index|
+    c12_students = students.select {|student|student[:name].length < 12}
+    c12_students.each_with_index do |student, index|
         puts "#{index+1}. #{student[:name]} (#{student[:cohort]} cohort)"
     end
 end
