@@ -34,8 +34,14 @@ def input_students
         else
             cohort = cohort.to_sym
         end
+        puts "Please enter the student's hobbies"
+        hobby = gets.chomp
+        puts "Please enter student's country of birth"
+        birth_country = gets.chomp
+        puts "Please enter students height"
+        height = gets.chomp
         #add the student hash to the array
-        students << {name: name, cohort: cohort,}
+        students << {name: name, cohort: cohort, hobby: hobby, birth_country: birth_country, height: height}
         if students.length == 1
             puts "Now we have 1 student"
             puts "Please add another student or press enter twice to exit"
@@ -59,7 +65,7 @@ def print(students)
     c12_students = students.select {|student|student[:name].length < 12}
     counter = 0
     until counter == c12_students.length 
-        puts "#{counter+1}. #{c12_students[counter][:name]} (#{c12_students[counter][:cohort]} cohort)"
+        puts "#{counter+1}. #{c12_students[counter][:name]} (#{c12_students[counter][:cohort]} cohort) has a height of #{c12_students[counter][:height]}, was born in #{c12_students[counter][:birth_country]} and likes #{c12_students[counter][:hobby]}."
         counter += 1
     end
 end
