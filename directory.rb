@@ -20,7 +20,7 @@ def input_students
     #create an empty array
     students = []
     #get the first name
-    name = gets.chomp
+    name = gets.delete!("\n")
     #while the name is not empty, repeat this code
     while !name.empty? do
         puts "Please enter the cohort"
