@@ -23,14 +23,26 @@ def input_students
     name = gets.chomp
     #while the name is not empty, repeat this code
     while !name.empty? do
+        puts "Please enter the cohort"
+        cohort = gets.chomp.capitalize
+        while cohort != "January" && cohort != "February" && cohort != "March" && cohort != "April" && cohort != "May" && cohort != "June" && cohort != "July" && cohort != "August" && cohort != "September" && cohort != "October" && cohort != "November" && cohort != "December" && cohort != ""
+            puts "Please enter January, February, March, April, May, June, July, August, September, October, November or December."
+            cohort = gets.chomp
+        end
+        if cohort.empty?
+            cohort = :November
+        else
+            cohort = cohort.to_sym
+        end
         #add the student hash to the array
-        students << {name: name, cohort: :november}
+        students << {name: name, cohort: cohort,}
         if students.length == 1
             puts "Now we have 1 student"
+            puts "Please add another student or press enter twice to exit"
         else
             puts "Now we have #{students.count} students"
+            puts "Please add another student or press enter twice to exit"
         end
-        
         #get another name from the user
         name = gets.chomp
     end
