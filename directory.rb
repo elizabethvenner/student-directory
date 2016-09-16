@@ -45,8 +45,10 @@ end
 
 def print(students)
     c12_students = students.select {|student|student[:name].length < 12}
-    c12_students.each_with_index do |student, index|
-        puts "#{index+1}. #{student[:name]} (#{student[:cohort]} cohort)"
+    counter = 0
+    until counter == c12_students.length 
+        puts "#{counter+1}. #{c12_students[counter][:name]} (#{c12_students[counter][:cohort]} cohort)"
+        counter += 1
     end
 end
 
