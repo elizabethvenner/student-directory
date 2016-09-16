@@ -57,24 +57,24 @@ def input_students
 end
 
 def print_header
-    puts "The students of Villains Academy"
-    puts "_______________"
+    puts "The students of Villains Academy".center(20)
+    puts "_______________".center(20)
 end
 
 def print(students)
     c12_students = students.select {|student|student[:name].length < 12}
     counter = 0
     until counter == c12_students.length 
-        puts "#{counter+1}. #{c12_students[counter][:name]} (#{c12_students[counter][:cohort]} cohort) has a height of #{c12_students[counter][:height]}, was born in #{c12_students[counter][:birth_country]} and likes #{c12_students[counter][:hobby]}."
+        puts "#{counter+1}. #{c12_students[counter][:name]} (#{c12_students[counter][:cohort]} cohort) has a height of #{c12_students[counter][:height]}, was born in #{c12_students[counter][:birth_country]} and likes #{c12_students[counter][:hobby]}.".center(50)
         counter += 1
     end
 end
 
 def print_footer(names)
     if names.count == 1
-        puts "Overall, we have 1 great student"
+        puts "Overall, we have 1 great student".center(20)
     else
-        puts "Overall, we have #{names.count} great students"
+        puts "Overall, we have #{names.count} great students".center(20)
     end
 end
 #nothing happens until we call the methods
