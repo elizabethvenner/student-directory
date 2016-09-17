@@ -62,11 +62,13 @@ def print_header
 end
 
 def print(students)
-    c12_students = students.select {|student|student[:name].length < 12}
-    counter = 0
-    until counter == c12_students.length 
-        puts "#{counter+1}. #{c12_students[counter][:name]} (#{c12_students[counter][:cohort]} cohort) has a height of #{c12_students[counter][:height]}, was born in #{c12_students[counter][:birth_country]} and likes #{c12_students[counter][:hobby]}.".center(50)
-        counter += 1
+    if students.count >= 1
+        c12_students = students.select {|student|student[:name].length < 12}
+        counter = 0
+        until counter == c12_students.length 
+            puts "#{counter+1}. #{c12_students[counter][:name]} (#{c12_students[counter][:cohort]} cohort) has a height of #{c12_students[counter][:height]}, was born in #{c12_students[counter][:birth_country]} and likes #{c12_students[counter][:hobby]}.".center(50)
+            counter += 1
+        end
     end
 end
 
