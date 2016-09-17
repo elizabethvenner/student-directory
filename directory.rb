@@ -4,7 +4,6 @@ def input_students
     puts "Please enter the names of the students"
     puts "To finish, just hit return twice"
     #create an empty array
-    students = []
     #get the first name
     name = gets.delete!("\n")
     #while the name is not empty, repeat this code
@@ -27,12 +26,12 @@ def input_students
         puts "Please enter students height in feet and inches"
         height = gets.chomp
         #add the student hash to the array
-        students << {name: name, cohort: cohort, hobby: hobby, birth_country: birth_country, height: height}
-        if students.length == 1
+        @students << {name: name, cohort: cohort, hobby: hobby, birth_country: birth_country, height: height}
+        if @students.length == 1
             puts "Now we have 1 student"
             puts "Please add another student or press enter twice to exit"
         else
-            puts "Now we have #{students.count} students"
+            puts "Now we have #{@students.count} students"
             puts "Please add another student or press enter twice to exit"
         end
         #get another name from the user
@@ -58,14 +57,14 @@ end
 
 def show_students
     print_header
-    print_students_list(@students)
-    print_footer(@students)
+    print_student_list
+    print_footer
 end
 
 def process (selection)
     case selection
         when "1"
-            @students = input_students
+            input_students
         when "2"
             show_students
         when "9"
@@ -80,13 +79,13 @@ def print_header
     puts "_______________".center(20)
 end
 
-def print_students_list(students)
+def print_student_list 
     cohorts = [:January, :February, :March, :April, :May, :June, :July, :August, :September, :October, :November, :December]
-    if students.count >= 1 # this is throwing an error - investigate later
+    if @students.count >= 1 # this is throwing an error - investigate later
         counter = 0
         cohorts.each do |cohort|
-            students.each do |student|
-                if cohort == student[:cohort] 
+            @students.each do |student|
+                if cohort == student[:cohort]  
                     counter += 1
                     puts"#{counter}. #{student[:name]} (#{student[:cohort]} cohort) is from #{student[:birth_country]}, measures #{student[:height]} and likes #{student[:hobby]}."
                 end
@@ -95,11 +94,12 @@ def print_students_list(students)
     end
 end
 
-def print_footer(names)
-    if names.count == 1
+
+def print_footer
+    if @students.count == 1
         puts "Overall, we have 1 great student".center(20)
     else
-        puts "Overall, we have #{names.count} great students".center(20)
+        puts "Overall, we have #{@students.count} great students".center(20)
     end
 end
 #nothing happens until we call the methods
