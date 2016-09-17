@@ -1,4 +1,8 @@
-@students = []  
+@students = [] 
+
+def input_to_array(name, cohort)
+    @students << {name: name, cohort: cohort.to_sym}
+end
 
 def input_students
     puts "Please enter the names of the students"
@@ -19,14 +23,14 @@ def input_students
         else
             cohort = cohort.to_sym
         end
-        puts "Please enter the student's hobbies"
-        hobby = STDIN.gets.chomp
-        puts "Please enter student's country of birth"
-        birth_country = STDIN.gets.chomp
-        puts "Please enter students height in feet and inches"
-        height = STDIN.gets.chomp
+        #puts "Please enter the student's hobbies"
+        #hobby = STDIN.gets.chomp
+        #puts "Please enter student's country of birth"
+        #birth_country = STDIN.gets.chomp
+        #puts "Please enter students height in feet and inches"
+        #height = STDIN.gets.chomp
         #add the student hash to the array
-        @students << {name: name, cohort: cohort, hobby: hobby, birth_country: birth_country, height: height}
+        input_to_array(name, cohort)
         if @students.length == 1
             puts "Now we have 1 student"
             puts "Please add another student or press enter twice to exit"
@@ -93,7 +97,7 @@ def print_student_list
             @students.each do |student|
                 if cohort == student[:cohort]  
                     counter += 1
-                    puts"#{counter}. #{student[:name]} (#{student[:cohort]} cohort) is from #{student[:birth_country]}, measures #{student[:height]} and likes #{student[:hobby]}."
+                    puts"#{counter}. #{student[:name]} (#{student[:cohort]} cohort)"
                 end
             end
         end
@@ -125,7 +129,7 @@ def load_students(filename = "students.csv")
     file = File.open(filename, "r")
     file.readlines.each do |line|
         name, cohort = line.chomp.split(',')
-            @students << {name: name, cohort: cohort.to_sym}
+            input_to_array(name, cohort)
     end
     file.close
 end
