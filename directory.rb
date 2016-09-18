@@ -81,7 +81,9 @@ def process (selection)
             save_students
             puts "Student(s) saved"
         when "4"
-             load_students 
+            puts "Which file would you like to load?"
+            filename = gets.chomp
+            load_students(filename) 
         when "9"
             puts "You are exiting the program"
             exit # this will cause the program to terminate
@@ -138,13 +140,13 @@ def load_students(filename="")
         puts "Which file would you like to load?"
         filename = gets.chomp
     end
-    file = File.open(filename, "r")
+    file = File.open(filename, "r"){|file|
     file.readlines.each do |line|
         name, @cohort = line.chomp.split(',')
             input_to_array(name, @cohort)
     end
     puts "Loaded #{@students.count} from #{filename}"
-    file.close
+    }
 end
 
 def load_students_from_command
