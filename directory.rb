@@ -82,7 +82,6 @@ def process (selection)
             puts "Student(s) saved"
         when "4"
              load_students 
-             puts "Student(s) loaded"
         when "9"
             puts "You are exiting the program"
             exit # this will cause the program to terminate
@@ -138,13 +137,15 @@ def load_students(filename = "students.csv")
         name, @cohort = line.chomp.split(',')
             input_to_array(name, @cohort)
     end
+    puts "Loaded #{@students.count} from #{filename}"
     file.close
 end
 
 def load_students_from_command
     filename = ARGV.first # first argument from the command line
-    return if filename.nil?
-    if File.exists?(filename)
+    if filename.nil?
+        load_students
+    elsif File.exists?(filename)
         load_students(filename)
         puts "Loaded #{@students.count} from #{filename}"
     else #if it doesn't exist
