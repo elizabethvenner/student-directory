@@ -39,7 +39,7 @@ def input_students
             puts "Now we have 1 student"
             puts "Please add another student or press enter twice to exit"
         else
-            puts "Now we have #{@students.count} students"
+            puts "You have successfully input this student. Now we have #{@students.count} students"
             puts "Please add another student or press enter twice to exit"
         end
         #get another name from the user
@@ -77,12 +77,15 @@ def process (selection)
             input_students
         when "2"
             show_students
-        when "9"
-            exit # this will cause the program to terminate
         when "3"
             save_students
+            puts "Student(s) saved"
         when "4"
-             load_students   
+             load_students 
+             puts "Student(s) loaded"
+        when "9"
+            puts "You are exiting the program"
+            exit # this will cause the program to terminate
         else
             puts "I don't know what you meant, try again"
     end
