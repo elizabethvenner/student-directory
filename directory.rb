@@ -1,28 +1,32 @@
 @students = [] 
 
+
+def enter_cohort
+    puts "Please enter the cohort"
+    @cohort = STDIN.gets.chomp.capitalize
+    while @cohort != "January" && @cohort != "February" && @cohort != "March" && @cohort != "April" && @cohort != "May" && @cohort != "June" && @cohort != "July" && @cohort != "August" && @cohort != "September" && @cohort != "October" && @cohort != "November" && @cohort != "December" && @cohort != ""
+        puts "Please enter January, February, March, April, May, June, July, August, September, October, November or December."
+        @cohort = STDIN.gets.chomp
+    end
+    if @cohort.empty?
+        @cohort = :November
+    else
+        @cohort = @cohort.to_sym
+    end
+end
+
 def input_to_array(name, cohort)
-    @students << {name: name, cohort: cohort.to_sym}
+    @students << {name: name, cohort: @cohort.to_sym}
 end
 
 def input_students
-    puts "Please enter the names of the students"
-    puts "To finish, just hit return twice"
+    puts "Please enter the names of the students. To finish, just hit return twice"
     #create an empty array
     #get the first name
     name = STDIN.gets.delete!("\n")
     #while the name is not empty, repeat this code
     while !name.empty? do
-        puts "Please enter the cohort"
-        cohort = STDIN.gets.chomp.capitalize
-        while cohort != "January" && cohort != "February" && cohort != "March" && cohort != "April" && cohort != "May" && cohort != "June" && cohort != "July" && cohort != "August" && cohort != "September" && cohort != "October" && cohort != "November" && cohort != "December" && cohort != ""
-            puts "Please enter January, February, March, April, May, June, July, August, September, October, November or December."
-            cohort = STDIN.gets.chomp
-        end
-        if cohort.empty?
-            cohort = :November
-        else
-            cohort = cohort.to_sym
-        end
+        enter_cohort
         #puts "Please enter the student's hobbies"
         #hobby = STDIN.gets.chomp
         #puts "Please enter student's country of birth"
@@ -30,7 +34,7 @@ def input_students
         #puts "Please enter students height in feet and inches"
         #height = STDIN.gets.chomp
         #add the student hash to the array
-        input_to_array(name, cohort)
+        input_to_array(name, @cohort)
         if @students.length == 1
             puts "Now we have 1 student"
             puts "Please add another student or press enter twice to exit"
@@ -128,8 +132,8 @@ end
 def load_students(filename = "students.csv")
     file = File.open(filename, "r")
     file.readlines.each do |line|
-        name, cohort = line.chomp.split(',')
-            input_to_array(name, cohort)
+        name, @cohort = line.chomp.split(',')
+            input_to_array(name, @cohort)
     end
     file.close
 end
@@ -138,6 +142,7 @@ def try_load_students
     filename = ARGV.first # first argument from the command line
     return if filename.nil?
     if File.exists?(filename)
+        load_students(filename)
         puts "Loaded #{@students.count} from #{filename}"
     else #if it doesn't exist
         puts "Sorry, #{filename} doesn't exist"
