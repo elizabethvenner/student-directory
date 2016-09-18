@@ -138,7 +138,7 @@ def load_students(filename = "students.csv")
     file.close
 end
 
-def try_load_students
+def load_students_from_command
     filename = ARGV.first # first argument from the command line
     return if filename.nil?
     if File.exists?(filename)
@@ -150,7 +150,7 @@ def try_load_students
     end
 end
 #nothing happens until we call the methods
-try_load_students
+load_students_from_command
 interactive_menu
 
 
