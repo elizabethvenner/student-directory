@@ -60,8 +60,8 @@ end
 def print_menu
     puts "1. Input the students"
     puts "2. Show the students"
-    puts "3. Save the list to students.csv"
-    puts "4. Load the list from students.csv"
+    puts "3. Save the list to file"
+    puts "4. Load the list from file"
     puts "9. Exit"
 end
 
@@ -121,7 +121,9 @@ end
 
 def save_students
     #open the file for writing
-    file = File.open("students.csv", "w")
+    puts "Which file would you like to save these students to?"
+    filename = gets.chomp
+    file = File.open(filename, "w")
     #iterate over the array of students
     @students.each do |student|
         student_data = [student[:name], student[:cohort]]
@@ -131,7 +133,11 @@ def save_students
     file.close
 end
 
-def load_students(filename = "students.csv")
+def load_students(filename="")
+    if filename.nil?
+        puts "Which file would you like to load?"
+        filename = gets.chomp
+    end
     file = File.open(filename, "r")
     file.readlines.each do |line|
         name, @cohort = line.chomp.split(',')
@@ -144,7 +150,7 @@ end
 def load_students_from_command
     filename = ARGV.first # first argument from the command line
     if filename.nil?
-        load_students
+        load_students(filename)
     elsif File.exists?(filename)
         load_students(filename)
         puts "Loaded #{@students.count} from #{filename}"
