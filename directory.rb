@@ -1,3 +1,4 @@
+require 'csv'
 @students = [] 
 
 
@@ -125,14 +126,13 @@ def save_students
     #open the file for writing
     puts "Which file would you like to save these students to?"
     filename = gets.chomp
-    file = File.open(filename, "w")
+    CSV.open(filename, "w") do |csv_object|
     #iterate over the array of students
-    @students.each do |student|
-        student_data = [student[:name], student[:cohort]]
-        csv_line = student_data.join(",")
-        file.puts csv_line
+        @students.each do |student|
+            student_data = [student[:name], student[:cohort]]
+            csv_object << student_data
+        end
     end
-    file.close
 end
 
 def load_students(filename="")
