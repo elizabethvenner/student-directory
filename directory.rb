@@ -140,13 +140,12 @@ def load_students(filename="")
         puts "Which file would you like to load?"
         filename = gets.chomp
     end
-    file = File.open(filename, "r"){|file|
-    file.readlines.each do |line|
-        name, @cohort = line.chomp.split(',')
-            input_to_array(name, @cohort)
+    CSV.foreach (filename) do |row|
+        name = row[0]
+        @cohort = row[1]
+        input_to_array(name, @cohort)
     end
     puts "Loaded #{@students.count} from #{filename}"
-    }
 end
 
 def load_students_from_command
